@@ -4,6 +4,24 @@
 
 WatchyShader::WatchyShader(){} //constructor
 
+
+float lerp(float a, float b, float t){
+	return a+t*(b-a);
+}
+
+float inverseLerp(float a, float b, float v){
+	return (v-a)/(b-a);
+}
+
+float smoothstep(float edgeA, float edgeB, float val){
+	float il = inverseLerp(edgeA,edgeB,val);
+	if(il<0)
+		return 0;
+	else if(il>1)
+		return 1;
+	return il;
+}
+
 void WatchyShader::drawPixel(int16_t x, int16_t y, float intensity){
 	if(randInt(0,100)*0.01<intensity)
 		display.drawPixel(x,y,0xFFFF);
@@ -17,8 +35,10 @@ void WatchyShader::drawLineH(int16_t height, float intensity){
 
 void WatchyShader::drawWatchFace(){
 	//draw a bg / skybox type thing
-	for(int y=0; y<200; y++)
-		drawLineH(y,1.0-y/199.0f);
+	for(int y=199; y>=0; y--){
+		float v = inverseLerp(199,0,y);
+		drawLineH(y,v);
+	}
 
 	drawTime();
 }
