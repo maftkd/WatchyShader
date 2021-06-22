@@ -9,6 +9,26 @@ their own procedural graphical backgrounds.
 ![alt text](images/pm.jpg?raw=true)
 ## PM
 
+## On Dithering:
+Since watchy's e-paper display only supports on/off pixels we need
+to be a little more creative to achieve gradients, or shades of grey.
+Dithering to the rescue. Dithering is how old school video games
+could create sunsets with a color palette of 8. The basic principle
+is to alternate the pixels so that from a far we see an average.
+
+There are a few different approaches to dithering:
+* Image effect - the image is processed in whole from greyscale 
+to black/white (i.e. Atkinson algorithm)
+* Procedural - using a function to dither on-demand. For example
+if(x+y)%intensity==0
+* Temporal - flickering pixels on and off so fast, the user cannot see.
+* Probability-based - A pixel is drawn using it's "intensity" value
+as a step function in a PRNG (like the Lehmer Generator)
+
+At the present, I've found the probability-based to be the easiest to
+play with and get going, but in the future I plan to explore other
+algorithms.
+
 ## Current Features:
 * Gradient background
 * Clock changes color based on AM / PM
@@ -19,3 +39,6 @@ their own procedural graphical backgrounds.
 * Triangle rendering
 * Simple directional fragment shading
 * Animation functionality
+* Alternate dithering algorithms
+* Image effects
+
