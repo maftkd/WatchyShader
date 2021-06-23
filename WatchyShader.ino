@@ -3,7 +3,8 @@
 WatchyShader watchy;
 
 void setup(){
-  watchy.init();
+	Serial.begin(9600);
+	watchy.init();
 }
 
 void loop(){}

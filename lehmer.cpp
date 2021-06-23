@@ -3,6 +3,10 @@
 
 uint32_t nProcGen=0;
 
+void setSeed(uint32_t seed){
+	nProcGen=seed;
+}
+
 uint32_t rnd(){
 	nProcGen += 0xe120fc15;
 	uint64_t tmp;
