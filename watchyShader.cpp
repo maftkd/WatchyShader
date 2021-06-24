@@ -48,8 +48,14 @@ void WatchyShader::drawVertex(vec3 vert){
 }
 
 void WatchyShader::drawLine(vec3 a, vec3 b){
-	display.drawLine((int)a.data[0],(int)a.data[1],
-			(int)b.data[0],(int)b.data[1],drawColor);
+	for(int i=0; i<3; i++){
+		display.drawLine((int)a.data[0]+i,(int)a.data[1],
+				(int)b.data[0]+i,(int)b.data[1],drawColor);
+	}
+	for(int i=0; i<3; i++){
+		display.drawLine((int)a.data[0],(int)a.data[1]+i,
+				(int)b.data[0],(int)b.data[1]+i,drawColor);
+	}
 }
 
 //inputs are in world space
@@ -82,6 +88,7 @@ void WatchyShader::drawTriangle(vec3 a, vec3 b, vec3 c, mat4 model){
 
 void WatchyShader::drawWatchFace(){
 	//test code for triangle rendering and mvp transformation
+	//uncomment for awesomeness
 	/*
 	if(!camInit)
 		initCam();
@@ -91,12 +98,19 @@ void WatchyShader::drawWatchFace(){
 	mat4 quat;
 	translate(&trans,vec3(0,0,1.0f));
 	//init the vertices
-	vec3 foo = vec3(0,0.25,0);
+	vec3 foo4 = vec3(-0.25,-0.25,0);
+	vec3 foo = vec3(-0.25,0.25,0);
+	vec3 foo3 = vec3(0.25,0.25,0);
 	vec3 foo2 = vec3(0.25,-0.25,0);
-	vec3 foo3 = vec3(-0.25,-0.25,0);
-	for(int i=0; i<20; i++){
+	for(int i=0; i<40; i++){
 		//clear to black
 		display.fillScreen(0x0000);
+		//draw gradient
+		setSeed(currentTime.Minute);
+		for(int y=199; y>=0; y--){
+			float v = inverseLerp(199,0,y);
+			//drawLineH(y,v);
+		}
 		//draw time
 		drawTime();
 		//translate triangle
@@ -104,11 +118,15 @@ void WatchyShader::drawWatchFace(){
 		rotate(&quat,worldUp,0.3145f);
 		model=trans*quat;
 		//draw triangle
-		drawTriangle(foo,foo2,foo3,model);
+		drawTriangle(foo4,foo,foo3,model);
+		drawTriangle(foo3,foo2,foo4,model);
 		display.display(true); //partial refresh
 	}
 	*/
 	
+	//this is old stuff - just testing out the gradient
+	//leaving it in for the commit so people checking out the git repo
+	//get what they expect from the images, but soon this will be culled
 	setSeed(currentTime.Minute);
 	//clear to black
 	display.fillScreen(0x0000);
@@ -127,11 +145,13 @@ void WatchyShader::drawTime(){
 	{
 		display.setCursor(5, 53+60+65+10);
 		display.setTextColor(0xFFFF);
+		drawColor = 0xFFFF;
 	}
 	else
 	{
 		display.setCursor(5, 53+15);
 		display.setTextColor(0x0000);
+		drawColor = 0x0000;
 	}
 
     if(currentTime.Hour < 10){
