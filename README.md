@@ -4,9 +4,9 @@ The source in this repo is meant to be more than just a watch face.
 The goal is also to provide developers with functionality to create
 their own procedural graphical backgrounds.
 
-![alt text](images/am.jpg?raw=true)
+![alt text](images/cubeam.png?raw=true)
 ## AM
-![alt text](images/pm.jpg?raw=true)
+![alt text](images/cubepm.png?raw=true)
 ## PM
 
 ## On Dithering:
