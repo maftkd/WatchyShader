@@ -15,6 +15,10 @@ struct vec3{
 		data[2]=z;
 	}
 
+	vec3(float* d){
+		memcpy(data,d,3*4);
+	}
+
 	void operator=(vec3 a){
 		memcpy(data,a.data,3*4);
 	}
@@ -29,6 +33,13 @@ struct vec4{
 	vec4(vec3 a, float w){
 		memcpy(data,a.data,3*4);
 		data[3]=w;
+	}
+	vec4(float x, float y, float z, float w){
+		data[0]=x;
+		data[1]=y;
+		data[2]=z;
+		data[3]=w;
+
 	}
 };
 
