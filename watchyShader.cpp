@@ -276,7 +276,7 @@ void WatchyShader::drawTime(){
 	}
 	else
 	{
-		display.setCursor(5, 53+15);
+		display.setCursor(5, 20);
 		display.setTextColor(0x0000);
 		display.fillScreen(0xFFFF);
 		drawColor = 0x0000;
