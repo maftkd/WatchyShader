@@ -32,13 +32,13 @@ algorithms.
 ## Current Features:
 * Gradient background
 * Clock changes color based on AM / PM
+* Perspective transformation and MVP
+* Shaded triangle rendering
+* Simple animation of model matrix over time
 
 ## Upcoming Features:
-* Perspective vertex rendering
-* Perspective changes via button press
-* Triangle rendering
-* Simple directional fragment shading
-* Animation functionality
+* 3d model file loading
+* 3d clock text
 * Alternate dithering algorithms
 * Image effects
 
